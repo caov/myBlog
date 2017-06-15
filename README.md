@@ -16,9 +16,15 @@ caovan博客概述
 
 三、内容概况
 --
-前台主要分为博客，分享，简历三个模块。博客模块主要是我一些对技术的碎碎念，分享模块主要是我平时遇到的一些好的网站、视频、书籍分享。简历是我个人的介绍。
-![]( https://github.com/caov/myBlog/raw/master/static/QQ截图20170615145450.png )
+前台主要分为博客，分享，简历三个模块。
+
+![image](https://github.com/caov/myBlog/blob/master/src/main/resources/static/1.png)
+博客模块主要是我一些对技术的碎碎念，分享模块主要是我平时遇到的一些好的网站、视频、书籍分享。简历是我个人的介绍。
+
+![image](https://github.com/caov/myBlog/blob/master/src/main/resources/static/2.png)
 后台主要是对访问用户的统计，博客，分享的编写。
+
+![image](https://github.com/caov/myBlog/blob/master/src/main/resources/static/3.png)
 
 四、关于我
 --
