@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8" />
+		<title>博客</title>
+		<link rel="Shortcut Icon" href="../static/images/cf.jpg" th:href="@{/images/cf.jpg}"/>
+		<link href="../static/css/core.css" th:href="@{/css/core.css}" rel="stylesheet" media="screen" />
+		<link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+	</head>
+<body style="background: url(../images/bg4.jpg) center 0 ;">
+	<div class="container blog_page">
+		<div class="blog_left">
+			<a class="to_home" href="/"></a>
+			<!-- <div class="to_home"></div> -->
+			<div class="category">
+				<span class="list_name" onclick="toCategoryBlog()">分类列表:</span>
+				<ul id="categoryList">
+				</ul>
+			</div>
+		</div>
+		
+		<div class="blog_content">
+			<div class="blogcont_name">博文列表:</div>
+			<div class="blogcont_list">
+				<ul id="blogList">
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script src="../static/js/jquery-2.1.1.js" th:src="@{js/jquery-2.1.1.js}"></script>
+	<script type="text/javascript">
+			
+			var categoryId ;
+	
+			$(document).ready(function(){
+				//进入页面从后台获取分类数据
+				$.post("/listCategory",function(data){
+					//写入内容
+				    $.each(data, function(i, item){
+				    		$("#categoryList").append('<li onclick="toCategoryBlog('+item.id+')">>&nbsp;'+item.name+'('+item.num+')</li>');
+						})
+	      		 },'json');
+				
+				//进入页面从后台获取博客数据
+				listBlog(categoryId)
+			});
+			
+			//进入页面从后台获取博客数据
+			function listBlog(categoryId){
+				$("#blogList").html("");//清空之前的网页内容
+				$.post("/listBlog",{categoryId:categoryId},function(data){
+					//写入内容
+				    $.each(data, function(i, item){
+				    			$("#blogList").append('<li><span class="cate" style="color:'+item.categoryColor+'" onclick="toCategoryBlog('+item.categoryId+')">'+item.category+'</span>'
+				    			+'<span class="every_title" onclick="toBlogDetails('+item.id+')" id="'+item.id+'">'+item.name+'</span></li>');
+						})
+	      		 },'json');
+			}
+			
+			function toBlogDetails(id){
+				window.location.href = "blogDetails?id="+id;
+			}
+			
+			function toCategoryBlog(id){
+				if(typeof(id) == "undefined"){//判断id是否传进来
+					listBlog(categoryId);
+				}else{
+					listBlog(id);
+				} 
+			}
+	</script>
+	
+</body>
+</html>

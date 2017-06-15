@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8" />
+		<title>分享</title>
+		<link rel="Shortcut Icon" href="../static/images/cf.jpg" th:href="@{/images/cf.jpg}"/>
+		<link href="../static/css/core.css" th:href="@{/css/core.css}" rel="stylesheet" media="screen" />
+		<link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+	</head>
+<body style="background: url(../images/bg4.jpg) center 0 ;">
+<div class="container share_page">
+		<div class="share_left">
+			<a class="to_home" href="/"></a>
+			<div class="category">
+				<span class="list_name" onclick="toCategoryShare()">分类列表:</span>
+				<ul id="categoryList">
+				</ul>
+			</div>
+		</div>
+		
+		<div class="share_content">
+			<div class="sharecont_name">分享列表:</div>
+			<div class="sharecont_list">
+				<ul id="shareList">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<script src="../static/js/jquery-2.1.1.js" th:src="@{js/jquery-2.1.1.js}"></script>
+	<script type="text/javascript">
+			
+			var categoryId ;
+	
+			$(document).ready(function(){
+				//进入页面从后台获取分类数据
+				$.post("/listShareCategory",function(data){
+					//写入内容
+				    $.each(data, function(i, item){
+				    		$("#categoryList").append('<li onclick="toCategoryShare('+item.id+')">>&nbsp;'+item.name+'('+item.num+')</li>');
+						})
+	      		 },'json');
+				
+				//进入页面从后台获取分享数据
+				listShare(categoryId)
+			});
+			
+			//进入页面从后台获取分享数据
+			function listShare(categoryId){
+				$("#shareList").html("");//清空之前的网页内容
+				$.post("/listShare",{categoryId:categoryId},function(data){
+					//写入内容
+				    $.each(data, function(i, item){
+				    	$("#shareList").append('<li><span class="shareEvery_category" onclick="toCategoryShare('+item.categoryId+')">'+item.category+'</span>'
+							+'<span class="shareEvery_cont">'+item.content+'</span>'
+							+'<span class="shareEvery_time">'+item.datetime+'</span></li>'	);
+						})
+	      		 },'json');
+			}
+			
+			function toBlogDetails(id){
+				window.location.href = "blogDetails?id="+id;
+			}
+			
+			function toCategoryShare(id){
+				if(typeof(id) == "undefined"){//判断id是否传进来
+					listShare(categoryId);
+				}else{
+					listShare(id);
+				} 
+			}
+	</script>
+	
+</body>
+</html>

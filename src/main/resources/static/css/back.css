@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+
+/* doBlog,doShare页面 begin*/
+#wrap{
+	background:#F9F9F9;
+	margin-top:50px;
+}
+
+#nav{
+	margin-top:10px;
+}
+
+#titleDiv{
+	margin-bottom: 30px;
+	margin-top:20px;
+}
+
+#titleDiv #title{
+	font-size:18px;
+	font-weight:blod;
+	margin-left:10px;
+	margin-bottom:5px;
+	
+}
+#categoryList{
+	height: 35px; 
+	width: 700px; 
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#categoryList option{
+	height: 35px; 
+	line-height:35px;
+}
+
+#submit{
+	text-align:center;
+}
+/* doBlog,doShare页面 over*/
+
+/* blogDetails页面begin */
+
+#wrap #blogTitle{
+	padding-top:10px;
+	font-size:18px;
+	font-weight:bold;
+	float:left;
+}
+
+#wrap #edit{
+	float:right;
+}
+
+#wrap #blogCategory{
+	margin-left:30px;
+	margin-top:10px;
+	font-size:15px;
+	width:100%;
+	float:left;
+}
+
+#blogCategory #categoryName{
+	font-color:#E43434;
+}
+
+#edit .editBlog{
+	cursor:pointer;
+}

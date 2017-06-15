@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8" />
+		<title>简历</title>
+		<link rel="Shortcut Icon" href="../static/images/cf.jpg" th:href="@{/images/cf.jpg}"/>
+		<link href="../static/css/core.css" th:href="@{/css/core.css}" rel="stylesheet" media="screen" />
+		<link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+	</head>
+<body style="background: url(../images/bg4.jpg) center 0 ;">
+<div class="container resume_page">
+		<div class="resume_left">
+			<a class="to_home" href="/"></a>
+		</div>
+		
+		<div class="resume_right">
+			<div class="resume_name">简&nbsp;历/RESUME</div>
+			<div class="resume_content">
+				
+				<!-- 基本信息 -->
+				<div class="resume_tip">BAISC INFO</div>
+				<div style="height:80px;padding:5px;margin-left:20px;">
+					<div style="height:40px;">
+						<div style="width:50%;float:left;">
+							<span class="resume_info">NAME：</span>
+							<span class="resume_van">曹凡</span>
+						</div>
+						<div style="width:50%;float:left;">
+							<span class="resume_info">GENDER：</span>
+							<span class="resume_gender">男</span>
+						</div>
+					</div>
+					<div style="height:40px;">
+						<div style="width:50%;float:left;">
+							<span class="resume_info">PLACE：</span>
+							<span class="resume_place">江西</span>
+						</div>
+						<div style="width:50%;float:left;">
+							<span class="resume_info">EMAIL：</span>
+							<span class="resume_email">caovan@163.com</span>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 自我评价 -->
+				<div class="resume_tip">SELF EVALUATION</div>
+				<div class="resume_self">做事靠谱，做人踏实</div>
+				
+				<!-- 教育经历 -->
+				<div class="resume_tip">EDUCATIONAL EXPERIENCE</div>
+				<div class="resume_edu">
+					<div>2012.9-2016.7</div>
+					<div>南昌航空大学</div>
+					<div>软件工程专业</div>
+					<div>本科</div>
+				</div>
+				
+				<!-- 基本技能 -->
+				<div class="resume_tip">BASIC SKILLS</div>
+				<div class="resume_skill">java</div>
+				
+				<!-- 工作经验 -->
+				<div class="resume_tip">PROJECT EXPERIENCE</div>
+				<div class="resume_experience">
+					1.视频网站的开发
+					2.CMS系统的维护
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

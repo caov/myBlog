@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Share后台</title>
+		<link rel="Shortcut Icon" href="../static/images/cf.jpg" th:href="@{/images/cf.jpg}"/>
+		<link href="../static/css/back.css" th:href="@{/css/back.css}" rel="stylesheet" media="screen" />
+		<link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+	</head>
+<body>
+	
+	<div class="container" id="wrap">
+		<div id="nav">
+			<ul class="nav nav-pills">
+			  <li role="presentation"><a href="/doBlog">BLOG</a></li>
+			  <li role="presentation"  class="active"><a href="/doShare">SHARE</a></li>
+			</ul>
+		</div>
+		<!-- 标题 -->
+		<div id="titleDiv">
+			<span id="title">标题：</span>
+			<input id="titleContent" type="text" class="form-control" placeholder="标题"/>
+		</div>
+		
+		<!-- 编辑区 -->
+		<div id="editor"></div>
+		
+		<!-- 分类 -->
+		<div id="categoryDiv">
+			<select id="categoryList">
+				<option value=""></option>
+			</select>
+		</div>
+		<button id="submit" class="btn btn-primary" onclick="addShare()" type="submit">submit</button>
+	</div>
+	
+	
+	<script src="../static/js/jquery-2.1.1.js" th:src="@{js/jquery-2.1.1.js}"></script>
+	<script src="../static/js/wangEditor.min.js" th:src="@{js/wangEditor.min.js}"></script>
+	<script type="text/javascript">
+		var E = window.wangEditor
+		var editor = new E("#editor")
+		
+		// 下面两个配置，使用其中一个即可显示“上传图片”的tab。但是两者不要同时使用！！！
+	    editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+	    // editor.customConfig.uploadImgServer = '/upload'  // 上传图片到服务器
+	    
+		editor.create();
+		
+		//从后台获取分类数据
+		$(document).ready(function(){
+			$.post("/listShareCategory",function(data){
+				//写入内容
+			    $.each(data, function(i, item){
+			    		$("#categoryList").append('<option value="'+item.id+'">'+item.name+'</option>');
+					})
+      		 },'json');
+		});
+		
+		function addShare(){
+			$.post("/addShare",
+					{name: $("#titleContent").val(),
+						content: editor.txt.html(),
+						categoryId:$("#categoryList").val()
+					},function(data){
+      			if(data == false){
+      				alert("add share fail")
+      			}else{
+      				window.location.href = "/share";
+      			}
+      		 },'json');
+		}
+	</script>		
+</body>
+</html>
